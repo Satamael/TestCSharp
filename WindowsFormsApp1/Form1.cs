@@ -25,8 +25,8 @@ namespace WindowsFormsApp1
     {
         int x;
         int y;
-        int Width = 100;
-        int Height = 100;
+        int Width;
+        int Height;
         string text;
         string picture;
         int pointHorse;
@@ -37,31 +37,24 @@ namespace WindowsFormsApp1
     {
         private Label labelQustion;
 
-        public void CreateAnswer(Answer once, SumPoints sum)
+        public void CreateAnswer(Answer ans, SumPoints sum)
         {
-            Button b1 = new Label();
-            b1.Text = once.text;
-            b1.Left = once.x;
-            b1.Top = once.y;
-            b1.Width = once.Width;
-            b1.Height = once.Height;
+            Button b1 = new Button();
+            b1.Text = ans.text;
+            b1.Left = ans.x;
+            b1.Top = ans.y;
+            b1.Width = ans.Width;
+            b1.Height = ans.Height;
             this.Controls.Add(b1);
             /*sum.Horse = sum.Horse + once.pointHorse;
             sum.Legs = sum.Legs + once.pointLegs;
             sum.Fly = sum.Fly + once.pointFly; 
-            
-            //FIXME 
-            добавление баллов по клику вообще сюда? 
-            Если да, то как правильно? 
-            Как вообще правильно обращаться к структурам? 
-            Чтобы в итоге оно считало эти баллы, и вообще структуры так? А переменную под структуру где лучше  объявлять? Принцип того как тест будет примерно работать, есть в ридми, но я так понимаю я от этого ещё далеко.
-            ответьте на это всё пожалуйста в вк,
-            ото в таком комментарии не найду)*/
+            */
         }
 
         public void CreateQuestion(Question once)
         {
-            l1 = LabelQuestion();
+            l1 = new Label();
             l1.Text = once.text;
             l1.Left = once.x;
             l1.Top = once.y;
@@ -73,9 +66,11 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
+            Answer ans1 {100, 30,100,100,"Всадник (СЛ)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\horses\h1.jpg"};
+            Answer ans2 { 100, 30,100,100,"Гимли (ВК)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\legs\l1.jpg"};
             InitializeComponent();
-            CreateAnswer("sdfsfd", 100, 300);
-            CreateAnswer("sdfsfd2", 200, 400);
+            CreateAnswer(ans1);
+            CreateAnswer(ans2);
         }
 
         private void Form1_Load(object sender, EventArgs e)
