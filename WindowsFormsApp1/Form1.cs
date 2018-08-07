@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         int Legs;
         int Fly;
     }
-        public struct Answer
+    public struct Answer
     {
         int x;
         int y;
@@ -32,6 +32,19 @@ namespace WindowsFormsApp1
         int pointHorse;
         int pointLegs;
         int pointFly;
+
+        public Answer(_x, _y, _Width, _Height, _text, _picture, _pointHorse, _pointLegs, pointFly)
+        {
+            x = _x;
+            y = _y;
+            Width = _Width;
+            Height = _Height;
+            text = _text;
+            picture = _picture;
+            pointHorse = _pointHorse;
+            pointLegs = _pointLegs;
+            pointFly = _pointFly;
+        }
     }
     public partial class Form1 : Form
     {
@@ -66,8 +79,8 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
-            Answer ans1 {100, 30,100,100,"Всадник (СЛ)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\horses\h1.jpg"};
-            Answer ans2 { 100, 30,100,100,"Гимли (ВК)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\legs\l1.jpg"};
+            Answer ans1 = new Answer (100, 30,100,100,"Всадник (СЛ)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\horses\h1.jpg"};
+            Answer ans2 = new Answer ( 100, 30,100,100,"Гимли (ВК)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\legs\l1.jpg"};
             InitializeComponent();
             CreateAnswer(ans1);
             CreateAnswer(ans2);
