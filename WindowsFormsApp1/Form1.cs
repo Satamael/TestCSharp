@@ -14,14 +14,25 @@ namespace WindowsFormsApp1
     {
         int answers;
         string Text;
+        public Question(public int _answers, public string Text){
+        answers = _answers;
+            text = _text;
     }
+}
     public struct SumPoints
     {
         int Horse;
         int Legs;
         int Fly;
-    }
-    public struct Answer
+
+        public SumPoints(public int _Horse, public int _Legs, public int Fly)
+        {
+            Horse = _Horse;
+            Legs = _Legs;
+            Fly = _Fly;
+        }
+}
+public struct Answer
     {
         int x;
         int y;
@@ -33,7 +44,7 @@ namespace WindowsFormsApp1
         int pointLegs;
         int pointFly;
 
-        public Answer(_x, _y, _Width, _Height, _text, _picture, _pointHorse, _pointLegs, pointFly)
+        public Answer(public int _x,public int _y,public int _Width,public int _Height,public string _text,public string _picture, public int _pointHorse, public int _pointLegs, public int pointFly)
         {
             x = _x;
             y = _y;
@@ -69,19 +80,18 @@ namespace WindowsFormsApp1
         {
             l1 = new Label();
             l1.Text = once.text;
-            l1.Left = once.x;
-            l1.Top = once.y;
-            l1.Width = once.Width;
-            l1.Height = once.Height;
+            l1.Left = 100;
+            l1.Top = 500;
+            l1.Width = 100;
+            l1.Height = 100;
             this.Controls.Add(l1);
             
         }
 
         public Form1()
         {
-            Answer ans1 = new Answer (100, 30,100,100,"Всадник (СЛ)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\horses\h1.jpg"};
-            Answer ans2 = new Answer ( 100, 30,100,100,"Гимли (ВК)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\legs\l1.jpg"};
-            InitializeComponent();
+            Answer ans1 = new Answer (100, 30,100,100,"Всадник (СЛ)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\horses\h1.jpg",1,2,3);
+            Answer ans2 = new Answer (100, 30,100,100,"Гимли (ВК)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\legs\l1.jpg",3,2,1);
             CreateAnswer(ans1);
             CreateAnswer(ans2);
         }
