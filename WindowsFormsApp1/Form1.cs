@@ -12,20 +12,20 @@ namespace WindowsFormsApp1
 {
     public struct Question
     {
-        int answers;
-        string Text;
-        public Question(public int _answers, public string Text){
+        public int answers;
+        public string text;
+        public Question(int _answers, string _text){
         answers = _answers;
             text = _text;
     }
 }
     public struct SumPoints
     {
-        int Horse;
-        int Legs;
-        int Fly;
+        public int Horse;
+        public int Legs;
+        public int Fly;
 
-        public SumPoints(public int _Horse, public int _Legs, public int Fly)
+        public SumPoints(int _Horse, int _Legs, int _Fly)
         {
             Horse = _Horse;
             Legs = _Legs;
@@ -34,17 +34,17 @@ namespace WindowsFormsApp1
 }
 public struct Answer
     {
-        int x;
-        int y;
-        int Width;
-        int Height;
-        string text;
-        string picture;
-        int pointHorse;
-        int pointLegs;
-        int pointFly;
+    public int x;
+    public int y;
+    public int Width;
+    public int Height;
+    public string text;
+    public string picture;
+    public int pointHorse;
+    public int pointLegs;
+    public int pointFly;
 
-        public Answer(public int _x,public int _y,public int _Width,public int _Height,public string _text,public string _picture, public int _pointHorse, public int _pointLegs, public int pointFly)
+        public Answer(int _x, int _y, int _Width, int _Height, string _text, string _picture, int _pointHorse, int _pointLegs, int _pointFly)
         {
             x = _x;
             y = _y;
@@ -78,7 +78,7 @@ public struct Answer
 
         public void CreateQuestion(Question once)
         {
-            l1 = new Label();
+            Label l1 = new Label();
             l1.Text = once.text;
             l1.Left = 100;
             l1.Top = 500;
@@ -90,40 +90,15 @@ public struct Answer
 
         public Form1()
         {
-            Answer ans1 = new Answer (100, 30,100,100,"Всадник (СЛ)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\horses\h1.jpg",1,2,3);
-            Answer ans2 = new Answer (100, 30,100,100,"Гимли (ВК)", "C:\Users\demid\source\repos\WindowsFormsApp1\pics\legs\l1.jpg",3,2,1);
-            CreateAnswer(ans1);
-            CreateAnswer(ans2);
+            Answer ans1 = new Answer (100, 30,100,100,"Всадник (СЛ)", "pics\\horses\\h1.jpg",1,2,3);
+            Answer ans2 = new Answer (100, 30,100,100,"Гимли (ВК)", "pics\\legs\\l1.jpg",3,2,1);
+            SumPoints sum = new SumPoints();
+            CreateAnswer(ans1, sum);
+            CreateAnswer(ans2, sum);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void InitializeComponent()
-        {
-            this.labelQustion = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // labelQustion
-            // 
-            this.labelQustion.AutoSize = true;
-            this.labelQustion.Location = new System.Drawing.Point(93, 9);
-            this.labelQustion.Name = "labelQustion";
-            this.labelQustion.Size = new System.Drawing.Size(178, 17);
-            this.labelQustion.TabIndex = 0;
-            this.labelQustion.Text = "Не, ну я тебя спрашиваю!";
-            this.labelQustion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelQustion.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // Form1
-            // 
-            this.ClientSize = new System.Drawing.Size(574, 442);
-            this.Controls.Add(this.labelQustion);
-            this.Name = "Form1";
-            this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
