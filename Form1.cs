@@ -70,16 +70,16 @@ namespace WindowsFormsApp1
         public Answer(int _x, int _y, int _Width, int _Height, int _picx, int _picy, int _picWidth, int _picHeight, String _text, String _picture, 
             int _pointHorse, int _pointLegs, int _pointFly, int _pointPirat)
         {
-            p1 = new PictureBox;
+            p1 = new PictureBox();
             b1 = new Button();
             x = _x;
             y = _y;
             Width = _Width;
             Height = _Height;
-            x = _picx;
-            y = _picy;
-            Width = _Width;
-            Height = _Height;
+            picx = _picx;
+            picy = _picy;
+            picWidth = _picWidth;
+            picHeight = _picHeight;
             text = _text;
             picture = _picture;
             pointHorse = _pointHorse;
@@ -103,7 +103,7 @@ namespace WindowsFormsApp1
         private Button button1;
         private Label labelQustion;
 
-        public void CreateAnswer(ref Answer ans, SumPoints sum)
+        public void CreateAnswer(ref Answer ans)
         {
             ans.b1 = new Button();
             ans.b1.Text = ans.text;
@@ -111,9 +111,15 @@ namespace WindowsFormsApp1
             ans.b1.Top = ans.y;
             ans.b1.Width = ans.Width;
             ans.b1.Height = ans.Height;
-            ans.p1.
             ans.b1.Click += new System.EventHandler(this.button2_Click);
             this.Controls.Add(ans.b1);
+
+            ans.p1 = new PictureBox();
+            ans.p1.Left = ans.picx;
+            ans.p1.Top = ans.picy;
+            ans.p1.Width = ans.picWidth;
+            ans.p1.Height = ans.picHeight;
+            //ans.p1.
             /*sum.Horse = sum.Horse + once.pointHorse;
             sum.Legs = sum.Legs + once.pointLegs;
             sum.Fly = sum.Fly + once.pointFly; 
@@ -135,10 +141,10 @@ namespace WindowsFormsApp1
         public Form1()
         {
             sum = new SumPoints(0, 0, 0, 0);
-            ans1 = new Answer (40, 400,120,120,"Всадник (СЛ)", "pics\\horses\\h1.jpg", 1, 0, 0, 0);
-            ans2 = new Answer(180, 400, 120, 120, "Гимли (ВК)", "pics\\legs\\l1.jpg", 0, 1, 0, 0);
-            ans3 = new Answer(320, 400, 120, 120, "Гальбаторикс (Эр)", "pics\\legs\\f1.jpg", 0, 0, 1, 0);
-            ans4 = new Answer(460, 400, 120, 120, "Кристин Ван Дер Вельде (Эт)", "pics\\legs\\p1.jpg", 0, 0, 0, 1);
+            ans1 = new Answer (40, 400,120,120,40,220,120,120,"Всадник (СЛ)", "pics\\horses\\h1.jpg", 1, 0, 0, 0);
+            ans2 = new Answer(180, 400, 120, 120,180, 220, 120, 120, "Гимли (ВК)", "pics\\legs\\l1.jpg", 0, 1, 0, 0);
+            ans3 = new Answer(320, 400, 120, 120,320, 220, 120, 120, "Гальбаторикс (Эр)", "pics\\legs\\f1.jpg", 0, 0, 1, 0);
+            ans4 = new Answer(460, 400, 120, 120,460, 220, 120, 120, "Кристин Ван Дер Вельде (Эт)", "pics\\legs\\p1.jpg", 0, 0, 0, 1);
             quest1 = new Question(4, "кто круче?", 120, 20, 400, 60);
          
             CreateQuestion(ref quest1);
