@@ -103,6 +103,13 @@ namespace WindowsFormsApp1
         private Button button1;
         private Label labelQustion;
 
+        public void PointsPlus(Answer ans, ref SumPoints sum)
+        {
+            sum.Horse = sum.Horse + ans.pointHorse;
+            sum.Legs = sum.Legs + ans.pointLegs;
+            sum.Fly = sum.Fly + ans.pointFly;
+        }
+
         public void CreateAnswer(ref Answer ans)
         {
             ans.b1 = new Button();
@@ -121,10 +128,6 @@ namespace WindowsFormsApp1
             ans.p1.Height = ans.picHeight;
             ans.p1.Image = Image.FromFile(ans.picture);
             this.Controls.Add(ans.p1);
-            /*sum.Horse = sum.Horse + once.pointHorse;
-            sum.Legs = sum.Legs + once.pointLegs;
-            sum.Fly = sum.Fly + once.pointFly; 
-            */
         }
 
         public void CreateQuestion(ref Question once)
@@ -141,9 +144,11 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
+            //string backgraund = "..\\..\\pics\\backgraund.jpg";
             this.Width = 600;
             this.Height = 600;
-            this.BackgroundImage = ..\\..\\pics\\backgraund.jpg
+            //this.BackgroundImage = backgraund;
+            
             sum = new SumPoints(0, 0, 0, 0);
             quest1 = new Question(4, "кто круче?", 120, 20, 400, 60);
             ans1 = new Answer (40, 400,120,80,40,240,120,120,"Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0);
@@ -181,8 +186,10 @@ namespace WindowsFormsApp1
             {
                 if (sender.Equals(ans[nomer].b1))
                 {
-                    MessageBox.Show(ans[nomer].b1.Text);
-                    //SumPoints.fly += ans[nomer].pointFly;
+                    PointsPlus(ans[nomer], ref sum);
+
+                    MessageBox.Show(ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());
+                    
                 }
             }
         }
