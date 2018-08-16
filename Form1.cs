@@ -119,7 +119,8 @@ namespace WindowsFormsApp1
             ans.p1.Top = ans.picy;
             ans.p1.Width = ans.picWidth;
             ans.p1.Height = ans.picHeight;
-            //ans.p1.
+            ans.p1.Image = Image.FromFile(ans.picture);
+            this.Controls.Add(ans.p1);
             /*sum.Horse = sum.Horse + once.pointHorse;
             sum.Legs = sum.Legs + once.pointLegs;
             sum.Fly = sum.Fly + once.pointFly; 
@@ -140,18 +141,22 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
+            this.Width = 600;
+            this.Height = 600;
+            this.BackgroundImage = ..\\..\\pics\\backgraund.jpg
             sum = new SumPoints(0, 0, 0, 0);
-            ans1 = new Answer (40, 400,120,120,40,220,120,120,"Всадник (СЛ)", "pics\\horses\\h1.jpg", 1, 0, 0, 0);
-            ans2 = new Answer(180, 400, 120, 120,180, 220, 120, 120, "Гимли (ВК)", "pics\\legs\\l1.jpg", 0, 1, 0, 0);
-            ans3 = new Answer(320, 400, 120, 120,320, 220, 120, 120, "Гальбаторикс (Эр)", "pics\\legs\\f1.jpg", 0, 0, 1, 0);
-            ans4 = new Answer(460, 400, 120, 120,460, 220, 120, 120, "Кристин Ван Дер Вельде (Эт)", "pics\\legs\\p1.jpg", 0, 0, 0, 1);
             quest1 = new Question(4, "кто круче?", 120, 20, 400, 60);
+            ans1 = new Answer (40, 400,120,80,40,240,120,120,"Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0);
+            ans2 = new Answer(180, 400, 120, 80,180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0);
+            ans3 = new Answer(320, 400, 120, 80,320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0);
+            ans4 = new Answer(460, 400, 120, 80,460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1);
+            
          
             CreateQuestion(ref quest1);
-            CreateAnswer(ref ans1, sum);
-            CreateAnswer(ref ans2, sum);
-            CreateAnswer(ref ans3, sum);
-            CreateAnswer(ref ans4, sum);
+            CreateAnswer(ref ans1);
+            CreateAnswer(ref ans2);
+            CreateAnswer(ref ans3);
+            CreateAnswer(ref ans4);
 
             ans.Add(ans1);
             ans.Add(ans2);
