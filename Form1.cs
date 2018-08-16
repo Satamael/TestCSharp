@@ -144,10 +144,10 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
-            //string backgraund = "..\\..\\pics\\backgraund.jpg";
+            string backgraund = "..\\..\\pics\\backgraund.jpg";
             this.Width = 600;
             this.Height = 600;
-            //this.BackgroundImage = backgraund;
+            this.BackgroundImage = Image.FromFile(backgraund);
             
             sum = new SumPoints(0, 0, 0, 0);
             quest1 = new Question(4, "кто круче?", 120, 20, 400, 60);
