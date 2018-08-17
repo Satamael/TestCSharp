@@ -103,11 +103,35 @@ namespace WindowsFormsApp1
         private Button button1;
         private Label labelQustion;
 
+        //public Color transparent { get; private set; }
+
         public void PointsPlus(Answer ans, ref SumPoints sum)
         {
             sum.Horse = sum.Horse + ans.pointHorse;
             sum.Legs = sum.Legs + ans.pointLegs;
             sum.Fly = sum.Fly + ans.pointFly;
+        }
+
+        public void NavigationButtons() {
+            Button batback = new Button();
+            batback.Text = "<<";
+            batback.Left = 40;
+            batback.Top = 480;
+            batback.Width = 100;
+            batback.Height = 40;
+            //batback.Click += new System.EventHandler(this.button2_Click);
+            this.Controls.Add(batback);
+
+            Button batnotback = new Button();
+            batnotback.Text = ">>";
+            batnotback.Left = 480;
+            batnotback.Top = 485;
+            batnotback.Width = 100;
+            batnotback.Height = 40;
+            //batnotback.Click += new System.EventHandler(this.button2_Click);
+            this.Controls.Add(batnotback);
+
+
         }
 
         public void CreateAnswer(ref Answer ans)
@@ -130,6 +154,18 @@ namespace WindowsFormsApp1
             this.Controls.Add(ans.p1);
         }
 
+        public void RaedmeButton()
+        {
+            Button readmebat = new Button();
+            readmebat.Text = "Шо це??? ";
+            readmebat.Left = 20;
+            readmebat.Top = 20;
+            readmebat.Width = 60;
+            readmebat.Height = 60;
+            //readmebat.Click += new System.EventHandler(this.button2_Click);
+            this.Controls.Add(readmebat);
+
+        }
         public void CreateQuestion(ref Question once)
         {
             Label l1 = new Label();
@@ -144,7 +180,8 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
-            string backgraund = "..\\..\\pics\\backgraund.jpg";
+            //сцук, задолбало искать. МЕЙН ТУТ
+            string backgraund =  "..\\..\\pics\\backgraund.jpg";
             this.Width = 600;
             this.Height = 600;
             this.BackgroundImage = Image.FromFile(backgraund);
@@ -162,7 +199,8 @@ namespace WindowsFormsApp1
             CreateAnswer(ref ans2);
             CreateAnswer(ref ans3);
             CreateAnswer(ref ans4);
-
+            NavigationButtons();
+            RaedmeButton();
             ans.Add(ans1);
             ans.Add(ans2);
             ans.Add(ans3);
