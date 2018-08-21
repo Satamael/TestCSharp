@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -19,6 +17,7 @@ namespace WindowsFormsApp1
         public int y;
         public int Width;
         public int Height;
+        public List<Answer> ans;
 
         public Question(int _answers, string _text, int _x, int _y, int _Width, int _Height){
             l1 = new Label();
@@ -28,8 +27,8 @@ namespace WindowsFormsApp1
             y = _y;
             Width = _Width;
             Height = _Height;
-
-}
+            ans = new List<Answer>();
+        }
     };
 
     public struct SumPoints
@@ -70,8 +69,6 @@ namespace WindowsFormsApp1
         public Answer(int _x, int _y, int _Width, int _Height, int _picx, int _picy, int _picWidth, int _picHeight, String _text, String _picture, 
             int _pointHorse, int _pointLegs, int _pointFly, int _pointPirat)
         {
-            p1 = new PictureBox();
-            b1 = new Button();
             x = _x;
             y = _y;
             Width = _Width;
@@ -86,24 +83,41 @@ namespace WindowsFormsApp1
             pointLegs = _pointLegs;
             pointFly = _pointFly;
             pointPirat = _pointPirat;
+
+            b1 = new Button();
+            b1.Text = text;
+            b1.Left = x;
+            b1.Top = y;
+            b1.Width = Width;
+            b1.Height = Height;
+
+            p1 = new PictureBox();
+            p1.Left = picx;
+            p1.Top = picy;
+            p1.Width = picWidth;
+            p1.Height = picHeight;
+            p1.Image = Image.FromFile(picture);
         }
     };
 
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Сумма ответов по группам
+        /// </summary>
         SumPoints sum;
-        Answer ans1;
-        Answer ans2;
-        Answer ans3;
-        Answer ans4;
-        Question quest1;
-        List<Answer> ans = new List<Answer>();
+        /// <summary>
+        /// Все вопросы
+        /// </summary>
         List<Question> quest = new List<Question>();
-
-        private Button button1;
-        private Label labelQustion;
-
-        //public Color transparent { get; private set; }
+        /// <summary>
+        /// Текущий вопрос
+        /// </summary>
+        Question quest1;
+        /// <summary>
+        /// Номер текущего вопроса
+        /// </summary>
+        int nomer_voprosa = -1;
 
         public void PointsPlus(Answer ans, ref SumPoints sum)
         {
@@ -112,48 +126,14 @@ namespace WindowsFormsApp1
             sum.Fly = sum.Fly + ans.pointFly;
         }
 
-        public void NavigationButtons() {
-            Button batback = new Button();
-            batback.Text = "<<";
-            batback.Left = 40;
-            batback.Top = 480;
-            batback.Width = 100;
-            batback.Height = 40;
-            //batback.Click += new System.EventHandler(this.button2_Click);
-            this.Controls.Add(batback);
-
-            Button batnotback = new Button();
-            batnotback.Text = ">>";
-            batnotback.Left = 480;
-            batnotback.Top = 485;
-            batnotback.Width = 100;
-            batnotback.Height = 40;
-            //batnotback.Click += new System.EventHandler(this.button2_Click);
-            this.Controls.Add(batnotback);
-
-
-        }
-
-        public void CreateAnswer(ref Answer ans)
+        public void CreateAnswer(Answer ans)
         {
-            ans.b1 = new Button();
-            ans.b1.Text = ans.text;
-            ans.b1.Left = ans.x;
-            ans.b1.Top = ans.y;
-            ans.b1.Width = ans.Width;
-            ans.b1.Height = ans.Height;
-            ans.b1.Click += new System.EventHandler(this.button2_Click);
+            ans.b1.Click += new System.EventHandler(this.answer_Click);
             this.Controls.Add(ans.b1);
-
-            ans.p1 = new PictureBox();
-            ans.p1.Left = ans.picx;
-            ans.p1.Top = ans.picy;
-            ans.p1.Width = ans.picWidth;
-            ans.p1.Height = ans.picHeight;
-            ans.p1.Image = Image.FromFile(ans.picture);
             this.Controls.Add(ans.p1);
         }
 
+        //Эту кнопку тоже создай в дизайнере. На фиг ее каждый раз конструктором вызывать?
         public void RaedmeButton()
         {
             Button readmebat = new Button();
@@ -162,11 +142,11 @@ namespace WindowsFormsApp1
             readmebat.Top = 20;
             readmebat.Width = 60;
             readmebat.Height = 60;
-            //readmebat.Click += new System.EventHandler(this.button2_Click);
+            //readmebat.Click += new System.EventHandler(this.answer_Click);
             this.Controls.Add(readmebat);
-
         }
-        public void CreateQuestion(ref Question once)
+
+        public void CreateQuestion(Question once)
         {
             Label l1 = new Label();
             l1.Text = once.text;
@@ -174,100 +154,115 @@ namespace WindowsFormsApp1
             l1.Top = once.y;
             l1.Width = once.Width;
             l1.Height = once.Height;
-            this.Controls.Add(l1);
-            
+            this.Controls.Add(l1);            
         }
 
         public Form1()
         {
             //сцук, задолбало искать. МЕЙН ТУТ
+            //Так вынеси структуры в отдельные файлы
             string backgraund =  "..\\..\\pics\\backgraund.jpg";
             this.Width = 600;
             this.Height = 600;
             this.BackgroundImage = Image.FromFile(backgraund);
             
             sum = new SumPoints(0, 0, 0, 0);
+
+            #region Заполняем вопросы
             quest1 = new Question(4, "кто круче?", 120, 20, 400, 60);
-            ans1 = new Answer (40, 400,120,80,40,240,120,120,"Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0);
-            ans2 = new Answer(180, 400, 120, 80,180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0);
-            ans3 = new Answer(320, 400, 120, 80,320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0);
-            ans4 = new Answer(460, 400, 120, 80,460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1);
-            
-         
-            CreateQuestion(ref quest1);
-            CreateAnswer(ref ans1);
-            CreateAnswer(ref ans2);
-            CreateAnswer(ref ans3);
-            CreateAnswer(ref ans4);
-            NavigationButtons();
-            RaedmeButton();
-            ans.Add(ans1);
-            ans.Add(ans2);
-            ans.Add(ans3);
-            ans.Add(ans4);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
             quest.Add(quest1);
+
+            quest1 = new Question(4, "кто круче-2?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+
+            quest1 = new Question(4, "кто круче-3?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+            #endregion
+
+            //Переходим к первому вопросу (был "минус первый")
+            batnotback_Click(null, null);
+            
+            InitializeComponent();
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
+        private void answer_Click(object sender, EventArgs e)
         {
-            /*if (sender.Equals(ans1.b1))
+            //Бегаем по всем ответам текущего вопроса
+            for (int nomer = 0; nomer < quest1.ans.Count; nomer++)
             {
-                MessageBox.Show(ans1.b1.Text);
-            }
-            if (sender.Equals(ans2.b1))
-            {
-                MessageBox.Show(ans2.b1.Text);
-            }*/
-
-            for (int nomer = 0; nomer < ans.Count; nomer++)
-            {
-                if (sender.Equals(ans[nomer].b1))
+                //И если где-то совпало, прибаляем к сумме
+                if (sender.Equals(quest1.ans[nomer].b1))
                 {
-                    PointsPlus(ans[nomer], ref sum);
+                    PointsPlus(quest1.ans[nomer], ref sum);
 
-                    MessageBox.Show(ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());
-                    
+                    MessageBox.Show(quest1.ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());                    
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Э, ты дурак? тыкать надо ниже!");
         }
-        
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
 
+        private void batback_Click(object sender, EventArgs e)
+        {
+            //Если это не первый вопрос
+            if (nomer_voprosa > 0)
+            {
+                //Переходим к предыдущему вопросу
+                nomer_voprosa--;
+                quest1 = quest[nomer_voprosa];
+                //Форму очищаем
+                this.Controls.Clear();
+                //Добавляем на нее кнопки
+                this.Controls.Add(batback);
+                this.Controls.Add(batnotback);
+                RaedmeButton();
+
+                //И рисуем текущий вопрос
+                CreateQuestion(quest1);
+                CreateAnswer(quest1.ans[0]);
+                CreateAnswer(quest1.ans[1]);
+                CreateAnswer(quest1.ans[2]);
+                CreateAnswer(quest1.ans[3]);
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void batnotback_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1");
-        }
+            //Если это не последний вопрос
+            if (nomer_voprosa < 2)
+            {
+                //Переходим к следующему вопросу
+                nomer_voprosa++;
+                quest1 = quest[nomer_voprosa];
+                //Форму очищаем
+                this.Controls.Clear();
+                //Добавляем на нее кнопки
+                this.Controls.Add(batback);
+                this.Controls.Add(batnotback);
+                RaedmeButton();
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Form1
-            // 
-            this.ClientSize = new System.Drawing.Size(582, 555);
-            this.Name = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load_2);
-            this.ResumeLayout(false);
-
-        }
-
-        private void Form1_Load_2(object sender, EventArgs e)
-        {
-
+                //И рисуем текущий вопрос
+                CreateQuestion(quest1);
+                CreateAnswer(quest1.ans[0]);
+                CreateAnswer(quest1.ans[1]);
+                CreateAnswer(quest1.ans[2]);
+                CreateAnswer(quest1.ans[3]);
+            }
         }
     }
 }
