@@ -6,100 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+
+
 namespace WindowsFormsApp1
-{
-    public struct Question
-    {
-        public Label l1;
-        public int answers;
-        public string text;
-        public int x;
-        public int y;
-        public int Width;
-        public int Height;
-        public List<Answer> ans;
+{  
 
-        public Question(int _answers, string _text, int _x, int _y, int _Width, int _Height){
-            l1 = new Label();
-            answers = _answers;
-            text = _text;
-            x = _x;
-            y = _y;
-            Width = _Width;
-            Height = _Height;
-            ans = new List<Answer>();
-        }
-    };
-
-    public struct SumPoints
-    {
-        public int Horse;
-        public int Legs;
-        public int Fly;
-        public int Pirat;
-
-        public SumPoints(int _Horse, int _Legs, int _Fly, int _Pirat)
-        {
-            Horse = _Horse;
-            Legs = _Legs;
-            Fly = _Fly;
-            Pirat = _Pirat;
-        }
-    };
-
-    public struct Answer
-    {
-        public PictureBox p1;
-        public Button b1;
-        public int x;
-        public int y;
-        public int Width;
-        public int Height;
-        public int picx;
-        public int picy;
-        public int picWidth;
-        public int picHeight;
-        public string text;
-        public string picture;
-        public int pointHorse;
-        public int pointLegs;
-        public int pointFly;
-        public int pointPirat;
-
-        public Answer(int _x, int _y, int _Width, int _Height, int _picx, int _picy, int _picWidth, int _picHeight, String _text, String _picture, 
-            int _pointHorse, int _pointLegs, int _pointFly, int _pointPirat)
-        {
-            x = _x;
-            y = _y;
-            Width = _Width;
-            Height = _Height;
-            picx = _picx;
-            picy = _picy;
-            picWidth = _picWidth;
-            picHeight = _picHeight;
-            text = _text;
-            picture = _picture;
-            pointHorse = _pointHorse;
-            pointLegs = _pointLegs;
-            pointFly = _pointFly;
-            pointPirat = _pointPirat;
-
-            b1 = new Button();
-            b1.Text = text;
-            b1.Left = x;
-            b1.Top = y;
-            b1.Width = Width;
-            b1.Height = Height;
-
-            p1 = new PictureBox();
-            p1.Left = picx;
-            p1.Top = picy;
-            p1.Width = picWidth;
-            p1.Height = picHeight;
-            p1.Image = Image.FromFile(picture);
-        }
-    };
-
+    
     public partial class Form1 : Form
     {
         /// <summary>
@@ -159,8 +71,7 @@ namespace WindowsFormsApp1
 
         public Form1()
         {
-            //сцук, задолбало искать. МЕЙН ТУТ
-            //Так вынеси структуры в отдельные файлы
+            
             string backgraund =  "..\\..\\pics\\backgraund.jpg";
             this.Width = 600;
             this.Height = 600;
@@ -169,32 +80,71 @@ namespace WindowsFormsApp1
             sum = new SumPoints(0, 0, 0, 0);
 
             #region Заполняем вопросы
-            quest1 = new Question(4, "кто круче?", 120, 20, 400, 60);
+            quest1 = new Question(4, "Кто круче?", 120, 20, 400, 60);
             quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
             quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
             quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
             quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
             quest.Add(quest1);
 
-            quest1 = new Question(4, "кто круче-2?", 120, 20, 400, 60);
-            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
-            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
-            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
-            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
-            quest.Add(quest1);
-
-            quest1 = new Question(4, "кто круче-3?", 120, 20, 400, 60);
-            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
-            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
-            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
-            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
+            #region Второй вопрос
+            quest1 = new Question(4, "Кто нравится тебе больше?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Джонни Блейз (ПГ)", "..\\..\\pics\\horses\\h2.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Тео (М)", "..\\..\\pics\\legs\\l2.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Эрагон (Эр)", "..\\..\\pics\\fly\\f2.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Лео Вальдес (ПД)", "..\\..\\pics\\pirats\\p2.jpg", 0, 0, 0, 1));
             quest.Add(quest1);
             #endregion
-
+            #region Третий вопрос
+            quest1 = new Question(4, "Кто интереснее?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Эомер (ВК)", "..\\..\\pics\\horses\\h3.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Мефодий Буслаев (МБ)", "..\\..\\pics\\legs\\l3.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Рина (ШНыр)", "..\\..\\pics\\fly\\f3.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Эдвард Кенуэй (КУ)", "..\\..\\pics\\pirats\\p3.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+            #endregion
+            #region четвёртый вопрос
+            quest1 = new Question(4, "Кто тебе ближе?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Вестники Конца Света", "..\\..\\pics\\horses\\h4.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Фродо (ВК)", "..\\..\\pics\\legs\\l4.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Перси Джексон (ПД)", "..\\..\\pics\\fly\\f4.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Джек Воробей (ПКМ)", "..\\..\\pics\\pirats\\p4.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+            #endregion
+            #region Пятый вопрос
+            quest1 = new Question(4, "Какую фитчу выберешь ты?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Плотва (В)", "..\\..\\pics\\horses\\h5.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Единое кольцо (ВК)", "..\\..\\pics\\legs\\l5.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Золотая Пчела (ШНыр)", "..\\..\\pics\\fly\\f5.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Атстекская монета (ПКМ)", "..\\..\\pics\\pirats\\p5.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+            #endregion
+            #region Шестой вопрос
+            quest1 = new Question(3, "Какое оружие тебе ближе?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Копьё рыцаря", "..\\..\\pics\\horses\\h6.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Кинжал", "..\\..\\pics\\legs\\l6.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Ручной арбалет", "..\\..\\pics\\fly\\f6.jpg", 0, 0, 1, 0));
+            quest.Add(quest1);
+            #endregion
+            #region Седьмой вопрос
+            quest1 = new Question(3, "Кто нравится больше?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Матвей Багров (МБ)", "..\\..\\pics\\legs\\l7.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Захарра Драгоций (Ч)", "..\\..\\pics\\fly\\f7.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Элизабет Суонн (ПКМ)", "..\\..\\pics\\pirats\\p6.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+            #endregion
+            #region Восьмой вопрос
+            quest1 = new Question(3, "Чей путь важнее?", 120, 20, 400, 60);
+            quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Арья (Эр)", "..\\..\\pics\\legs\\l8.jpg", 0, 1, 0, 0));
+            quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Иккинг (КПД)", "..\\..\\pics\\fly\\f8.jpg", 0, 0, 1, 0));
+            quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Уилл Тёрнер (ПКМ)", "..\\..\\pics\\pirats\\p7.jpg", 0, 0, 0, 1));
+            quest.Add(quest1);
+            #endregion
+            #endregion
             //Переходим к первому вопросу (был "минус первый")
             batnotback_Click(null, null);
             
-            InitializeComponent();
+  
         }
 
         private void answer_Click(object sender, EventArgs e)
@@ -207,7 +157,32 @@ namespace WindowsFormsApp1
                 {
                     PointsPlus(quest1.ans[nomer], ref sum);
 
-                    MessageBox.Show(quest1.ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());                    
+                    MessageBox.Show(quest1.ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());
+
+                    if (nomer_voprosa < 7)
+                    {
+                        //Переходим к следующему вопросу
+                        nomer_voprosa++;
+                        quest1 = quest[nomer_voprosa];
+                        //Форму очищаем
+                        this.Controls.Clear();
+                        //Добавляем на нее кнопки
+                        this.Controls.Add(batback);
+                        this.Controls.Add(batnotback);
+                        RaedmeButton();
+
+                        //И рисуем текущий вопрос
+                        CreateQuestion(quest1);
+                        for (int N = 0; N < quest1.answers; N++)
+                        {
+                            CreateAnswer(quest1.ans[N]);
+                        }
+                        /*CreateAnswer(quest1.ans[1]);
+                        CreateAnswer(quest1.ans[2]);
+                        CreateAnswer(quest1.ans[3]);*/
+                    }
+                    
+                    
                 }
             }
         }
@@ -263,6 +238,18 @@ namespace WindowsFormsApp1
                 CreateAnswer(quest1.ans[2]);
                 CreateAnswer(quest1.ans[3]);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
