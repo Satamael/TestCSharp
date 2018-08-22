@@ -26,6 +26,8 @@ namespace WindowsFormsApp1
         /// Текущий вопрос
         /// </summary>
         Question quest1;
+        private Button button1;
+
         /// <summary>
         /// Номер текущего вопроса
         /// </summary>
@@ -73,8 +75,7 @@ namespace WindowsFormsApp1
         {
             
             string backgraund =  "..\\..\\pics\\backgraund.jpg";
-            this.Width = 600;
-            this.Height = 600;
+           
             this.BackgroundImage = Image.FromFile(backgraund);
             
             sum = new SumPoints(0, 0, 0, 0);
@@ -141,7 +142,7 @@ namespace WindowsFormsApp1
             quest.Add(quest1);
             #endregion
             #endregion
-            //Переходим к первому вопросу (был "минус первый")
+            
             batnotback_Click(null, null);
             
   
@@ -248,6 +249,62 @@ namespace WindowsFormsApp1
        
 
         private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /*private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Form1
+            // 
+            this.ClientSize = new System.Drawing.Size(578, 551);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Name = "Form1";
+            this.Text = "Тестирование";
+            this.Load += new System.EventHandler(this.Form1_Load_2);
+            this.ResumeLayout(false);
+
+        }*/
+
+        private void Form1_Load_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitializeComponent()
+        {
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(29, 360);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // Form1
+            // 
+            this.ClientSize = new System.Drawing.Size(379, 421);
+            this.Controls.Add(this.button1);
+            this.Name = "Form1";
+            this.ResumeLayout(false);
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }

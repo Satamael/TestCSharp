@@ -22,7 +22,7 @@
 
         #region Windows Form Designer generated code
 
-        private void InitializeComponent()
+        /*private void InitializeComponent()
         {
             this.batnotback = new System.Windows.Forms.Button();
             this.batback = new System.Windows.Forms.Button();
@@ -53,11 +53,13 @@
             this.ClientSize = new System.Drawing.Size(582, 555);
             this.Controls.Add(this.batnotback);
             this.Controls.Add(this.batback);
-            this.Name = "Form1";
+            this.Name = "Тестирование ";
+            this.Width = 600;
+            this.Height = 600;
             this.ResumeLayout(false);
 
         }
- 
+ */
         #endregion
 
         private System.Windows.Forms.Button batnotback;
