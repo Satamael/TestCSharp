@@ -38,6 +38,7 @@ namespace WindowsFormsApp1
             sum.Horse = sum.Horse + ans.pointHorse;
             sum.Legs = sum.Legs + ans.pointLegs;
             sum.Fly = sum.Fly + ans.pointFly;
+            sum.Pirat = sum.Pirat + ans.pointPirat;
         }
 
         public void CreateAnswer(Answer ans)
@@ -71,9 +72,31 @@ namespace WindowsFormsApp1
             this.Controls.Add(l1);            
         }
 
+        public void Results(string pic, string resulttext)
+        {
+            Label l1 = new Label();
+            l1.Text = resulttext;
+            l1.Left = 100;
+            l1.Top = 440;
+            l1.Width = 300;
+            l1.Height = 40;
+            this.Controls.Add(l1);
+
+            PictureBox p1 = new PictureBox();
+            p1.Left = 100;
+            p1.Top = 120;
+            p1.Width = 300;
+            p1.Height = 300;
+            p1.Image = Image.FromFile(pic);
+            this.Controls.Add(p1);
+
+        }
+        
         public Form1()
         {
-            
+
+            this.Width = 600;
+            this.Height = 600;
             string backgraund =  "..\\..\\pics\\backgraund.jpg";
            
             this.BackgroundImage = Image.FromFile(backgraund);
@@ -82,7 +105,7 @@ namespace WindowsFormsApp1
 
             #region Заполняем вопросы
             quest1 = new Question(4, "Кто круче?", 120, 20, 400, 60);
-            quest1.ans.Add(new Answer(40, 400, 120, 80, 40, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
+            quest1.ans.Add(new Answer(40, 400, 120, 80, 20, 240, 120, 120, "Всадник (СЛ)", "..\\..\\pics\\horses\\h1.jpg", 1, 0, 0, 0));
             quest1.ans.Add(new Answer(180, 400, 120, 80, 180, 240, 120, 120, "Гимли (ВК)", "..\\..\\pics\\legs\\l1.jpg", 0, 1, 0, 0));
             quest1.ans.Add(new Answer(320, 400, 120, 80, 320, 240, 120, 120, "Гальбаторикс (Эр)", "..\\..\\pics\\fly\\f1.jpg", 0, 0, 1, 0));
             quest1.ans.Add(new Answer(460, 400, 120, 80, 460, 240, 120, 120, "Кристин Ван Дер Вельде (Эт)", "..\\..\\pics\\pirats\\p1.jpg", 0, 0, 0, 1));
@@ -158,7 +181,7 @@ namespace WindowsFormsApp1
                 {
                     PointsPlus(quest1.ans[nomer], ref sum);
 
-                    MessageBox.Show(quest1.ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());
+                    //MessageBox.Show(quest1.ans[nomer].b1.Text + " Конина" + sum.Horse.ToString());
 
                     if (nomer_voprosa < 7)
                     {
@@ -178,20 +201,32 @@ namespace WindowsFormsApp1
                         {
                             CreateAnswer(quest1.ans[N]);
                         }
-                        /*CreateAnswer(quest1.ans[1]);
-                        CreateAnswer(quest1.ans[2]);
-                        CreateAnswer(quest1.ans[3]);*/
+                      
                     }
-                    
+
+                
+                  if(nomer_voprosa == 7)
+                    {
+                        this.Controls.Clear();
+                        if(sum.Horse>sum.Legs && sum.Horse > sum.Fly && sum.Horse > sum.Pirat)
+                        {
+                            Results("..\\..\\pics\\horses\\hr.jpg", "Верхом на лошади, это про вас. Седлайте коней, и вперёд!");
+                        } else if(sum.Legs > sum.Horse && sum.Legs > sum.Fly && sum.Legs > sum.Pirat)
+                        {
+                            Results("..\\..\\pics\\legs\\lr.jpg", "Верхом? Зачем? На своих двоих надёжнее. Вперёд пешком!");
+                        } else if (sum.Fly > sum.Horse && sum.Fly > sum.Legs && sum.Fly > sum.Pirat)
+                        {
+                            Results("..\\..\\pics\\fly\\fr.jpg", "Что может быть лучше, чем полёт? Небо ждёт, седлайте крылатых!");
+                        } else if (sum.Pirat > sum.Horse && sum.Pirat > sum.Legs && sum.Pirat > sum.Fly)
+                        {
+                            Results("..\\..\\pics\\pirats\\pr.jpg", "17 человек на сундук мертвеца! Ваш выбор - корабль. Попутного ветра!");
+                        }
+                    }  
                     
                 }
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Э, ты дурак? тыкать надо ниже!");
-        }
 
         private void batback_Click(object sender, EventArgs e)
         {
@@ -220,7 +255,7 @@ namespace WindowsFormsApp1
         private void batnotback_Click(object sender, EventArgs e)
         {
             //Если это не последний вопрос
-            if (nomer_voprosa < 2)
+            if (nomer_voprosa < 7)
             {
                 //Переходим к следующему вопросу
                 nomer_voprosa++;
@@ -260,27 +295,14 @@ namespace WindowsFormsApp1
 
         }
 
-        /*private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Form1
-            // 
-            this.ClientSize = new System.Drawing.Size(578, 551);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "Form1";
-            this.Text = "Тестирование";
-            this.Load += new System.EventHandler(this.Form1_Load_2);
-            this.ResumeLayout(false);
-
-        }*/
+       
 
         private void Form1_Load_2(object sender, EventArgs e)
         {
 
         }
 
-        private void InitializeComponent()
+       /* private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -291,20 +313,30 @@ namespace WindowsFormsApp1
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "назад должно";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.batback_Click);
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(379, 421);
+            this.ClientSize = new System.Drawing.Size(578, 551);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximumSize = new System.Drawing.Size(600, 600);
+            this.MinimumSize = new System.Drawing.Size(600, 600);
+            this.Text = "Тест про сёдла";
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load_3);
             this.ResumeLayout(false);
+
+        }*/
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void Form1_Load_3(object sender, EventArgs e)
         {
 
         }

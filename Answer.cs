@@ -12,16 +12,37 @@ namespace WindowsFormsApp1
     {
         public PictureBox p1;
         public Button b1;
+        /// <summary>
+        /// координаты по иксу кнопки
+        /// </summary>
         public int x;
+        /// <summary>
+        /// координаты по угрику кнопки
+        /// </summary>
         public int y;
         /// <summary>
-        /// Это ширина
+        /// Это ширина кнопки
         /// </summary>
         public int Width;
+        /// <summary>
+        /// высота кнопки
+        /// </summary>
         public int Height;
+        /// <summary>
+        /// x picB
+        /// </summary>
         public int picx;
+        /// <summary>
+        /// y picB
+        /// </summary>
         public int picy;
+        /// <summary>
+        /// shir picB
+        /// </summary>
         public int picWidth;
+        /// <summary>
+        /// visita picB
+        /// </summary>
         public int picHeight;
         public string text;
         public string picture;
