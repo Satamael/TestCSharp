@@ -18,3 +18,5 @@ D:\repo3\obj\Debug\WindowsFormsApp1.pdb
 D:\repo3\bin\Debug\WindowsFormsApp1.exe.config
 D:\repo3\bin\Debug\WindowsFormsApp1.exe
 D:\repo3\bin\Debug\WindowsFormsApp1.pdb
+D:\repo3\obj\Debug\Interop.WMPLib.dll
+D:\repo3\obj\Debug\WindowsFormsApp1.csproj.ResolveComReference.cache

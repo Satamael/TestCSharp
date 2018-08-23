@@ -22,7 +22,7 @@
 
         #region Windows Form Designer generated code
 
-        private void InitializeComponent()
+        /*private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -49,7 +49,7 @@
             this.Load += new System.EventHandler(this.Form1_Load_3);
             this.ResumeLayout(false);
 
-        }
+        }*/
         #endregion
 
         private System.Windows.Forms.Button batnotback;

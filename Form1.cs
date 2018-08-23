@@ -312,9 +312,17 @@ namespace WindowsFormsApp1
             }
         }
 
+        public WMPLib.WindowsMediaPlayer WMP = new WMPLib.WindowsMediaPlayer();
+
         private void Form1_Load(object sender, EventArgs e)
         {
+       
 
+            WMP.URL = @"..\\..\\sounds\\music.mp3"; // файл музыкальный
+            WMP.settings.volume = 100; // меняя значение можно регулировать громкость
+            WMP.controls.play(); // Старт
+            WMP.controls.stop(); // Стоп
+            WMP.close();
         }
 
        
@@ -373,6 +381,24 @@ namespace WindowsFormsApp1
         }
 
         private void Form1_Load_3(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Form1
+            // 
+            this.ClientSize = new System.Drawing.Size(424, 393);
+            this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void Form1_Load_4(object sender, EventArgs e)
         {
 
         }
