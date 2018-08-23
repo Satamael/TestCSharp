@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -41,7 +42,42 @@ namespace WindowsFormsApp1
             sum.Pirat = sum.Pirat + ans.pointPirat;
         }
 
-        public void CreateAnswer(Answer ans)
+
+        public static void read()
+        {
+            System.IO.StreamReader readme = null;
+
+            try
+            {
+                readme = File.OpenText(@"..\\..\\README.md");
+                Console.WriteLine(readme.ReadToEnd());
+            }
+            // will return an invalid file name error
+            catch (FileNotFoundException errorMsg)
+            {
+                Console.WriteLine("Error, " + errorMsg.Message);
+            }
+            // will return an invalid path error
+            catch (Exception errorMsg)
+            {
+                Console.WriteLine("Error, " + errorMsg.Message);
+            }
+            finally
+            {
+                if (readme != null)
+                {
+                    readme.Close();
+                }
+            }
+        }
+
+        private void readmebut_Click(object sender, EventArgs e)
+        {
+            read();
+
+
+        }
+            public void CreateAnswer(Answer ans)
         {
             ans.b1.Click += new System.EventHandler(this.answer_Click);
             this.Controls.Add(ans.b1);
@@ -57,7 +93,7 @@ namespace WindowsFormsApp1
             readmebat.Top = 20;
             readmebat.Width = 60;
             readmebat.Height = 60;
-            //readmebat.Click += new System.EventHandler(this.answer_Click);
+            readmebat.Click += new System.EventHandler(this.readmebut_Click);
             this.Controls.Add(readmebat);
         }
 
